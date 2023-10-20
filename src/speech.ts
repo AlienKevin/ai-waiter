@@ -1,10 +1,22 @@
+function isAppleDevice() {
+	const userAgent = window.navigator.userAgent;
+	const platform = window.navigator.platform;
+	const applePlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K', 'iPhone', 'iPad', 'iPod'];
+  
+	return applePlatforms.some(platformName => platform.includes(platformName));
+}
+
 let recognition: SpeechRecognition;
 if (typeof webkitSpeechRecognition === "undefined") {
 	document.getElementById("not-supported")!.textContent = "你嘅瀏覽器唔支援語音辨識服務，無法使用本程式。請使用其他瀏覽器。";
 	(document.getElementById("form-submit") as HTMLInputElement).disabled = true;
 } else {
 	recognition = new webkitSpeechRecognition();
-	recognition.lang = "zh-HK";
+	if (isAppleDevice()) {
+        	recognition.lang = "yue-HK";
+	} else {
+		recognition.lang = "zh-HK";
+	}
 	recognition.interimResults = true;
 }
 
