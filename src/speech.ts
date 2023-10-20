@@ -4,12 +4,7 @@ if (typeof webkitSpeechRecognition === "undefined") {
 	(document.getElementById("form-submit") as HTMLInputElement).disabled = true;
 } else {
 	recognition = new webkitSpeechRecognition();
-	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-	if (isChrome) {
-        	recognition.lang = "yue-HK";
-	} else {
-		recognition.lang = "zh-HK";
-	}
+	recognition.lang = "zh-yue-Hant-HK";
 	recognition.interimResults = true;
 }
 
